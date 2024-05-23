@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tutorial_tracker/models/pillar.dart';
 import 'pages/tutorials_page.dart';
 
 void main() {
@@ -13,6 +14,8 @@ class Application extends StatefulWidget {
 }
 
 class _ApplicationState extends State<Application> {
+  final pillar = Pillar(type: PillarType.flutter, articleCount: 115);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +25,7 @@ class _ApplicationState extends State<Application> {
         appBar: AppBar(
           title: const Text('Tutorial Tracker'),
         ),
-        body: const TutorialsPage(),
+        body: TutorialsPage(pillar: pillar,),
       ),
     );
   }
