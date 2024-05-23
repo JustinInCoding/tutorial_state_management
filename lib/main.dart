@@ -15,6 +15,25 @@ class Application extends StatefulWidget {
 
 class _ApplicationState extends State<Application> {
   final pillar = Pillar(type: PillarType.flutter, articleCount: 115);
+  late ValueNotifier<int> valueNotifier;
+
+  @override
+  void initState() {
+    super.initState();
+    valueNotifier = ValueNotifier<int>(pillar.articleCount);
+    valueNotifier.addListener(() {
+      setState(() {
+        final increaseAmount = valueNotifier.value - pillar.articleCount;
+        pillar.increaseArticleCount(by: increaseAmount);
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    valueNotifier.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +44,10 @@ class _ApplicationState extends State<Application> {
         appBar: AppBar(
           title: const Text('Tutorial Tracker'),
         ),
-        body: TutorialsPage(pillar: pillar,),
+        body: TutorialsPage(
+          pillar: pillar,
+          valueNotifier: valueNotifier,
+        ),
       ),
     );
   }

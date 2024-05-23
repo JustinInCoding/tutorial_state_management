@@ -3,7 +3,8 @@ import 'package:tutorial_tracker/models/pillar.dart';
 
 class TutorialWidget extends StatefulWidget {
   final Pillar pillar;
-  const TutorialWidget({super.key, required this.pillar});
+  final ValueNotifier<int> valueNotifier;
+  const TutorialWidget({super.key, required this.pillar, required this.valueNotifier});
 
   @override
   State<TutorialWidget> createState() => _TutorialWidgetState();
@@ -16,9 +17,7 @@ class _TutorialWidgetState extends State<TutorialWidget> {
       children: [
         InkWell(
           onTap: () {
-            setState(() {
-              widget.pillar.increaseArticleCount();
-            });
+            widget.valueNotifier.value += 1;
           },
           child:
               Image.asset('assets/images/${widget.pillar.type.imageName}', width: 110, height: 110),
