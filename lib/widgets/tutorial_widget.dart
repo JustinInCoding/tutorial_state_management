@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:tutorial_tracker/models/pillar.dart';
+
+import '../state/pillar_widget.dart';
 
 class TutorialWidget extends StatefulWidget {
-  final Pillar pillar;
-  const TutorialWidget({super.key, required this.pillar});
+  const TutorialWidget({super.key});
 
   @override
   State<TutorialWidget> createState() => _TutorialWidgetState();
 }
 
-class _TutorialWidgetState extends State<TutorialWidget> {
+class _TutorialWidgetState extends State<TutorialWidget> { 
   @override
   Widget build(BuildContext context) {
+    final pillar = PillarInheritedWidget.of(context);
     return Stack(
       children: [
         InkWell(
           onTap: () {
-            widget.pillar.increaseArticleCount();
+            pillar.increaseArticleCount(by: 1);
           },
           child:
-              Image.asset('assets/images/${widget.pillar.type.imageName}', width: 110, height: 110),
+              Image.asset('assets/images/${pillar.imageName}', width: 110, height: 110),
         ),
         Positioned(
           bottom: 2,
           child: CircleAvatar(
             backgroundColor: Colors.blue,
-            child: Text(widget.pillar.articleCount.toString()),
+            child: Text(pillar.articleCount.toString()),
           ),
         )
       ],
