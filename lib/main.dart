@@ -17,21 +17,6 @@ class _ApplicationState extends State<Application> {
   final pillar = Pillar(type: PillarType.flutter, articleCount: 115);
 
   @override
-  void initState() {
-    super.initState();
-    pillar.addListener(() {
-      setState(() {
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    pillar.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Tutorial Tracker',
@@ -40,8 +25,13 @@ class _ApplicationState extends State<Application> {
         appBar: AppBar(
           title: const Text('Tutorial Tracker'),
         ),
-        body: TutorialsPage(
-          pillar: pillar,
+        body: ValueListenableBuilder(
+          valueListenable: pillar,
+          builder: (context, value, child) {
+            return TutorialsPage(
+              pillar: pillar,
+            );
+          },
         ),
       ),
     );
