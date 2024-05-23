@@ -15,23 +15,19 @@ class Application extends StatefulWidget {
 
 class _ApplicationState extends State<Application> {
   final pillar = Pillar(type: PillarType.flutter, articleCount: 115);
-  late ValueNotifier<int> valueNotifier;
 
   @override
   void initState() {
     super.initState();
-    valueNotifier = ValueNotifier<int>(pillar.articleCount);
-    valueNotifier.addListener(() {
+    pillar.addListener(() {
       setState(() {
-        final increaseAmount = valueNotifier.value - pillar.articleCount;
-        pillar.increaseArticleCount(by: increaseAmount);
       });
     });
   }
 
   @override
   void dispose() {
-    valueNotifier.dispose();
+    pillar.dispose();
     super.dispose();
   }
 
@@ -46,7 +42,6 @@ class _ApplicationState extends State<Application> {
         ),
         body: TutorialsPage(
           pillar: pillar,
-          valueNotifier: valueNotifier,
         ),
       ),
     );

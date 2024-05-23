@@ -4,8 +4,7 @@ import '../widgets/tutorial_widget.dart';
 
 class TutorialsPage extends StatefulWidget {
   final Pillar pillar;
-  final ValueNotifier<int> valueNotifier;
-  const TutorialsPage({super.key, required this.pillar, required this.valueNotifier});
+  const TutorialsPage({super.key, required this.pillar});
 
   @override
   State<TutorialsPage> createState() => _TutorialsPageState();
@@ -17,7 +16,7 @@ class _TutorialsPageState extends State<TutorialsPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Center(child: TutorialWidget(pillar: widget.pillar, valueNotifier: widget.valueNotifier,)),
+        Center(child: TutorialWidget(pillar: widget.pillar)),
         Padding(
           padding: const EdgeInsets.only(top: 24.0),
           child: Text(

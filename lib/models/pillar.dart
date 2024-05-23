@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 
-class Pillar {
-  int _articleCount = 0;
-  int get articleCount => _articleCount;
+class Pillar extends ValueNotifier<int> {
+  int get articleCount => value;
   var active = true;
   final PillarType type;
 
-  Pillar({required this.type, int articleCount = 10}) {
-    _articleCount = articleCount;
-  }
+  Pillar({required this.type, int articleCount = 10}) : super(articleCount);
 
   void increaseArticleCount({int by = 1}) {
-    _articleCount += by;
+    value += by;
   }
 }
 
